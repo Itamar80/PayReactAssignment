@@ -1,4 +1,3 @@
-import './App.css';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,8 +11,8 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   // {
-  //   path: "/not-home",
-  //   element: <NotHome />,
+  //   path: "/album-info/:id",
+  //   element: <AlbumInfo />,
   // },
 ]);
 
