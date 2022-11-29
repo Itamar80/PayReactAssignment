@@ -7,3 +7,11 @@
     position: absolute;
     right: 0;
 }
+
+.thumbnail{
+    /* TODO change design */
+    position: absolute;
+    background-color: white;
+    width: 115%;
+    z-index: 1;
+}
