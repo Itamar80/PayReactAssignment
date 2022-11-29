@@ -2,12 +2,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-evenly;
     border-radius: 15px;
     background-color: lightblue;
-    width: 270px;
     height: 200px;
+    margin-bottom: 1rem;
 }
 
 .user-name{

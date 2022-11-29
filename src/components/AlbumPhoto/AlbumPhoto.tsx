@@ -4,13 +4,15 @@ import './AlbumPhoto.css'
 
 type Props = {
     photo: PhotoDTO;
+    deletePhoto: (photoId: number) => void;
 }
 
 
-export const AlbumPhoto: FC<Props> = ({ photo }): JSX.Element => {
+export const AlbumPhoto: FC<Props> = ({ photo, deletePhoto }): JSX.Element => {
     return (
         <div className='photo-container'>
-            {photo.thumbnailUrl}
+            <button className='exit-button' onClick={() => deletePhoto(photo.id)}>x</button>
+            <img src={photo.thumbnailUrl} alt={'thumbnail'} />
         </div>
     )
 }

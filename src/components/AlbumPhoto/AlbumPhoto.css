@@ -1,28 +1,9 @@
-.album-container{
+.photo-container{
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 15px;
-    background-color: lightblue;
-    width: 270px;
-    height: 200px;
 }
 
-.user-name{
-    text-align: center;
-}
 
-.user-email{
-    text-align: center;
-}
-
-.collapse-image{
+.exit-button{
     position: absolute;
-    background-color: red;
-    bottom: 0;
-    left: 50%;
-    text-align: center;
-    cursor: pointer;
+    right: 0;
 }
