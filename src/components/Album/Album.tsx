@@ -5,7 +5,7 @@ import { SelectedPhoto } from '../SelectedPhoto/SelectedPhoto';
 import { useQuery } from 'react-query'
 import { getAlbumPhotos } from '../../services/service';
 import './Album.css'
-import { PHOTOS, PHOTOS_ERROR } from '../../consts';
+import { DRAG_ERROR, MAX_PHOTOS, PHOTOS, PHOTOS_ERROR } from '../../consts';
 import { Error } from '../Error/Error';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -27,10 +27,14 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
     const previusOverItem = useRef(null) as MutableRefObject<number | null>;
 
     const getPhotos = async (): Promise<void> => {
-        const { data: fetchdPhotos, error } = await refetch();
-        if (!fetchdPhotos?.length || error) return setError(PHOTOS_ERROR);
-        setError(null);
-        setPhotos(fetchdPhotos.slice(0, 12))
+        try {
+            const { data: fetchdPhotos, error } = await refetch();
+            if (!fetchdPhotos?.length || error) return setError(PHOTOS_ERROR);
+            setError(null);
+            setPhotos(fetchdPhotos.slice(0, MAX_PHOTOS))
+        } catch (err) {
+            setError(error)
+        }
     }
 
     const deletePhoto = (photoId: number): void => {
@@ -59,7 +63,7 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
             setPhotos(sortedPhotos)
             return
         }
-        setError('Drag between two adjacent please')
+        setError(DRAG_ERROR)
         return
     }
 
