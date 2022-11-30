@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 import { useQuery } from 'react-query'
-import { Album } from '../../components/Album/Album';
+import { AlbumComponent } from '../../components/Album/Album';
 import { Header } from '../../components/Header/Header';
 import { ALBUMS, USERS } from '../../consts';
 import { getAlbums, getUsers } from '../../services/service';
-import { AlbumDTO } from '../../types/types';
+import { Album } from '../../types/types';
 import { Error } from '../../components/Error/Error';
 import './Home.css'
 import { Loader } from '../../components/Loader/Loader';
@@ -24,7 +24,7 @@ export const Home: FC = (): JSX.Element => {
         <>
             <Header />
             <div className='data-container'>
-                {albums.map((album: AlbumDTO) => <Album setError={setError} key={album.id} user={users[album.userId]} album={album} />)}
+                {albums.map((album: Album) => <AlbumComponent setError={setError} key={album.id} user={users[album.userId]} album={album} />)}
         </div>
         </>
     )

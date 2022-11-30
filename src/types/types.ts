@@ -1,10 +1,10 @@
-export type AlbumDTO = {
+export type Album = {
     userId: number,
     id: number,
     title: string
 }
 
-export type UserDTO = {
+export type User = {
     id: number,
     name: string,
     username: string,
@@ -28,7 +28,7 @@ export type UserDTO = {
     }
 }
 
-export type PhotoDTO = {
+export type Photo = {
     albumId: number,
     id: number,
     title: string,

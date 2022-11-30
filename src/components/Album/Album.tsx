@@ -2,20 +2,20 @@ import { FC, MutableRefObject, useRef, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { getAlbumPhotos } from '../../services/service';
-import { AlbumDTO, PhotoDTO, UserDTO } from '../../types/types';
+import { Album, Photo, User } from '../../types/types';
 import { ThumbnailImage } from '../ThumbnailImage/ThumbnailImage';
 import { SelectedPhoto } from '../SelectedPhoto/SelectedPhoto';
 import './Album.css'
 
 type Props = {
-    album: AlbumDTO;
-    user: UserDTO;
+    album: Album;
+    user: User;
     setError: (boolean: boolean) => void;
 }
 
 
-export const Album: FC<Props> = ({ album, user, setError }): JSX.Element => {
-    const [photos, setPhotos] = useState<PhotoDTO[]>([]);
+export const AlbumComponent: FC<Props> = ({ album, user, setError }): JSX.Element => {
+    const [photos, setPhotos] = useState<Photo[]>([]);
     const [selectedPhoto, setSelectedPhoto] = useState<string>('');
     const dragItem = useRef(null) as MutableRefObject<number | null>;
     const dragOverItem = useRef(null) as MutableRefObject<number | null>;

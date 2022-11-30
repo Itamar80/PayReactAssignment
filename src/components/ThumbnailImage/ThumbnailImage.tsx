@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
-import { PhotoDTO } from '../../types/types';
+import { Photo } from '../../types/types';
 import './ThumbnailImage.css'
 import { useDrag } from 'react-dnd';
 
 type Props = {
-    photo: PhotoDTO;
+    photo: Photo;
     deletePhoto: (photoId: number) => void;
     setSelectedPhoto: (str: string) => void;
     index: number;
