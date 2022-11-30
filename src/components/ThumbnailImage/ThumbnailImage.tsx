@@ -9,8 +9,9 @@ type Props = {
     setSelectedPhoto: (str: string) => void;
     index: number;
     handleSort: () => void;
-    dragItem: React.MutableRefObject<any>;
-    dragOverItem: React.MutableRefObject<any>;
+    dragItem: React.MutableRefObject<null | number>;
+    dragOverItem: React.MutableRefObject<null | number>;
+    previusOverItem: React.MutableRefObject<null | number>;
 }
 
 
@@ -21,7 +22,8 @@ export const ThumbnailImage: FC<Props> = ({
     setSelectedPhoto,
     handleSort,
     dragItem,
-    dragOverItem
+    dragOverItem,
+    previusOverItem
 }): JSX.Element => {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: 'div',
@@ -36,6 +38,11 @@ export const ThumbnailImage: FC<Props> = ({
         e.stopPropagation()
     }
 
+    const setDragOverRefs = () => {
+        previusOverItem.current = dragOverItem.current
+        dragOverItem.current = index
+    }
+
     return (
         <div className={`photo-container`}
             ref={drag}
@@ -44,7 +51,7 @@ export const ThumbnailImage: FC<Props> = ({
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
             onDragStart={() => dragItem.current = index}
-            onDragEnter={() => dragOverItem.current = index}
+            onDragEnter={() => setDragOverRefs()}
             onDragEnd={handleSort}
             onClick={() => setSelectedPhoto(photo.url)}
             onDragOver={(e) => e.preventDefault()}

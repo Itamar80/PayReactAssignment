@@ -24,6 +24,7 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
     const [error, setError] = useState<string | null>('');
     const dragItem = useRef(null) as MutableRefObject<number | null>;
     const dragOverItem = useRef(null) as MutableRefObject<number | null>;
+    const previusOverItem = useRef(null) as MutableRefObject<number | null>;
 
     const getPhotos = async (): Promise<void> => {
         const { data: fetchdPhotos, error } = await refetch();
@@ -44,9 +45,11 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
 
     const handleSort = () => {
         let sortedPhotos = [...photos];
-        if (!dragItem.current || !dragOverItem.current) return;
+        if (!dragItem.current || !dragOverItem.current || !previusOverItem.current) return;
         const draggedItemContent = sortedPhotos.splice(dragItem.current, 1)[0];
-        sortedPhotos.splice(dragOverItem.current, 0, draggedItemContent);
+        const isPrevuisAboveCurrent = previusOverItem.current > dragOverItem.current;
+        const indexToReplace = isPrevuisAboveCurrent ? previusOverItem.current : dragOverItem.current;
+        sortedPhotos.splice(indexToReplace, 0, draggedItemContent);
         dragItem.current = null;
         dragOverItem.current = null;
         setPhotos(sortedPhotos)
@@ -71,6 +74,7 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
                             photo={photo}
                             index={index}
                             dragItem={dragItem}
+                            previusOverItem={previusOverItem}
                             dragOverItem={dragOverItem}
                         />)}
                     </DndProvider>
