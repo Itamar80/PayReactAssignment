@@ -3,7 +3,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { getAlbumPhotos } from '../../services/service';
 import { AlbumDTO, PhotoDTO, UserDTO } from '../../types/types';
-import { AlbumPhoto } from '../AlbumPhoto/AlbumPhoto';
+import { ThumbnailImage } from '../ThumbnailImage/ThumbnailImage';
 import { SelectedPhoto } from '../SelectedPhoto/SelectedPhoto';
 import './Album.css'
 
@@ -56,7 +56,7 @@ export const Album: FC<Props> = ({ album, user, setError }): JSX.Element => {
             {!!photos &&
                 <div className='album-info-container'>
                     <DndProvider backend={HTML5Backend}>
-                        {photos.map((photo, index) => <AlbumPhoto
+                        {photos.map((photo, index) => <ThumbnailImage
                             key={photo.id}
                             handleSort={handleSort}
                             setSelectedPhoto={setSelectedPhoto}

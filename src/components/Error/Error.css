@@ -1,0 +1,36 @@
+.album-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 15px;
+    background-color: lightblue;
+    margin-bottom: 1rem;
+    padding:2rem
+}
+
+.user-name{
+    text-align: center;
+}
+
+.user-email{
+    text-align: center;
+}
+
+.collapse-image{
+    position: absolute;
+    background-color: red;
+    bottom: 0;
+    left: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.album-info-container{
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(4, 150px);
+    gap: 3rem;
+    margin: 0 auto;
+    margin-top: 15px;
+}

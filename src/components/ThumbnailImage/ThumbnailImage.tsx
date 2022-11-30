@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { PhotoDTO } from '../../types/types';
-import './AlbumPhoto.css'
+import './ThumbnailImage.css'
 import { useDrag } from 'react-dnd';
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 }
 
 
-export const AlbumPhoto: FC<Props> = ({
+export const ThumbnailImage: FC<Props> = ({
     photo,
     index,
     deletePhoto,
@@ -31,6 +31,11 @@ export const AlbumPhoto: FC<Props> = ({
     }));
     const [isHover, setIsHover] = useState<boolean>(false);
 
+    const onDeletePhoto = (e: React.MouseEvent<HTMLElement>) => {
+        deletePhoto(photo.id);
+        e.stopPropagation()
+    }
+
     return (
         <div className={`photo-container`}
             ref={drag}
@@ -38,8 +43,8 @@ export const AlbumPhoto: FC<Props> = ({
             style={{ border: isDragging ? '5px solid pink' : '0px' }}
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
-            onDragStart={(e) => dragItem.current = index}
-            onDragEnter={(e) => dragOverItem.current = index}
+            onDragStart={() => dragItem.current = index}
+            onDragEnter={() => dragOverItem.current = index}
             onDragEnd={handleSort}
             onClick={() => setSelectedPhoto(photo.url)}
             onDragOver={(e) => e.preventDefault()}
@@ -48,7 +53,7 @@ export const AlbumPhoto: FC<Props> = ({
                 {photo.title}
             </div>}
             {/* TODO make in the image */}
-            <button className='exit-button' onClick={() => deletePhoto(photo.id)}>x</button>
+            <button className='exit-button' onClick={(e) => onDeletePhoto(e)}>x</button>
             <img src={photo.thumbnailUrl} alt={'thumbnail'} />
         </div>
     )
