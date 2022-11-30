@@ -43,16 +43,24 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
         return getPhotos()
     }
 
-    const handleSort = () => {
+    const handleSort = (): void => {
+        setError('')
         let sortedPhotos = [...photos];
         if (!dragItem.current || !dragOverItem.current || !previusOverItem.current) return;
-        const draggedItemContent = sortedPhotos.splice(dragItem.current, 1)[0];
-        const isPrevuisAboveCurrent = previusOverItem.current > dragOverItem.current;
-        const indexToReplace = isPrevuisAboveCurrent ? previusOverItem.current : dragOverItem.current;
-        sortedPhotos.splice(indexToReplace, 0, draggedItemContent);
-        dragItem.current = null;
-        dragOverItem.current = null;
-        setPhotos(sortedPhotos)
+        if ((dragOverItem.current - previusOverItem.current) === 1 ||
+            (previusOverItem.current - dragOverItem.current) === 1
+        ) {
+            const draggedItemContent = sortedPhotos.splice(dragItem.current, 1)[0];
+            const isPrevuisAboveCurrent = previusOverItem.current > dragOverItem.current;
+            const indexToReplace = isPrevuisAboveCurrent ? previusOverItem.current : dragOverItem.current;
+            sortedPhotos.splice(indexToReplace, 0, draggedItemContent);
+            dragItem.current = null;
+            dragOverItem.current = null;
+            setPhotos(sortedPhotos)
+            return
+        }
+        setError('Drag between two adjacent please')
+        return
     }
 
     return (
