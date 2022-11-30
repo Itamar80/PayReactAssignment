@@ -25,3 +25,12 @@
     text-align: center;
     cursor: pointer;
 }
+
+.album-info-container{
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(4, 150px);
+    gap: 3rem;
+    margin: 0 auto;
+    margin-top: 15px;
+}

@@ -22,7 +22,6 @@ export const Home: FC = (): JSX.Element => {
             <Header />
             <div className='data-container'>
                 {albums.map((album: AlbumDTO) => <Album setError={setError} key={album.id} user={users[album.userId]} album={album} />)}
-
         </div>
         </>
     )
