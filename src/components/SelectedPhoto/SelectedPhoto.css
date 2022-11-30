@@ -1,0 +1,16 @@
+.selected-photo-container{
+    position: fixed;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.selected-photo-container span{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: white;
+    cursor: pointer;
+}

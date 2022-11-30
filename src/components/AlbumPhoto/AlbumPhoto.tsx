@@ -5,15 +5,18 @@ import './AlbumPhoto.css'
 type Props = {
     photo: PhotoDTO;
     deletePhoto: (photoId: number) => void;
+    setSelectedPhoto: (str: string) => void;
 }
 
 
-export const AlbumPhoto: FC<Props> = ({ photo, deletePhoto }): JSX.Element => {
+export const AlbumPhoto: FC<Props> = ({ photo, deletePhoto, setSelectedPhoto }): JSX.Element => {
     const [isHover, setIsHover] = useState<boolean>(false);
+
     return (
         <div className='photo-container'
-            onMouseEnter={() => setIsHover(true)}
-            onMouseLeave={() => setIsHover(false)}
+            onMouseEnter={() => setIsHover(!isHover)}
+            onMouseLeave={() => setIsHover(!isHover)}
+            onClick={() => setSelectedPhoto(photo.url)}
         >
             {isHover && <div className='thumbnail'>
                 {photo.title}

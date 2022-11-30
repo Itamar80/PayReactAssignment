@@ -1,10 +1,6 @@
 .album-info-container{
-    max-width: 1200px;
-    position: fixed;
-    top: 50%;  /* position the top  edge of the element at the middle of the parent */
-    left: 50%; /* position the left edge of the element at the middle of the parent */
-    transform: translate(-50%, -50%);
     display: grid;
+    position: relative;
     grid-template-columns: repeat(4, 1fr);
     gap: 5rem;
 

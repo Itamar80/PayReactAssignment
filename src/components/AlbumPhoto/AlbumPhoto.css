@@ -11,6 +11,7 @@
 .thumbnail{
     /* TODO change design */
     position: absolute;
+    top:15px;
     background-color: white;
     width: 115%;
     z-index: 1;
