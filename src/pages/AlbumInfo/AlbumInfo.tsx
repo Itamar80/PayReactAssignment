@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { AlbumPhoto } from '../../components/AlbumPhoto/AlbumPhoto';
 import { SelectedPhoto } from '../../components/SelectedPhoto/SelectedPhoto';
 import { PhotoDTO } from '../../types/types';

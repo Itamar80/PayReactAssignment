@@ -5,7 +5,7 @@ type Props = {
 }
 
 
-export const Header: FC<Props> = ({ }): JSX.Element => {
+export const Header: FC<Props> = (): JSX.Element => {
     return (
         <div className='header-container'>
             header

@@ -3,8 +3,7 @@ import { useQuery } from 'react-query'
 import { Album } from '../../components/Album/Album';
 import { Header } from '../../components/Header/Header';
 import { getAlbums, getUsers } from '../../services/service';
-import { AlbumDTO, PhotoDTO } from '../../types/types';
-import { AlbumInfo } from '../AlbumInfo/AlbumInfo';
+import { AlbumDTO } from '../../types/types';
 import './Home.css'
 
 
