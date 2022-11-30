@@ -1,6 +1,4 @@
 import { FC, MutableRefObject, useRef, useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Album, Photo, User } from '../../types/types';
 import { ThumbnailImage } from '../ThumbnailImage/ThumbnailImage';
 import { SelectedPhoto } from '../SelectedPhoto/SelectedPhoto';
@@ -9,15 +7,18 @@ import { getAlbumPhotos } from '../../services/service';
 import './Album.css'
 import { PHOTOS, PHOTOS_ERROR } from '../../consts';
 import { Error } from '../Error/Error';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 type Props = {
     album: Album;
     user: User;
 }
 
-
 export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
-    const { refetch } = useQuery([PHOTOS, album.id], () => getAlbumPhotos(album.id));
+    const { refetch } = useQuery([PHOTOS, album.id], () => getAlbumPhotos(album.id), {
+        enabled: false
+    });
     const [photos, setPhotos] = useState<Photo[]>([]);
     const [selectedPhoto, setSelectedPhoto] = useState<string>('');
     const [error, setError] = useState<string | null>('');
@@ -58,9 +59,9 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
             <div className='user-name'>{user?.name}</div>
             <div className='user-email'>{user?.email}</div>
             <div className='collapse-image' onClick={() => toggleInfo()}>^</div>
+            {!!error && <Error text={error} />}
             {!!photos &&
                 <div className='album-info-container'>
-                    {!!error && <Error text={error} />}
                     <DndProvider backend={HTML5Backend}>
                         {photos.map((photo, index) => <ThumbnailImage
                             key={photo.id}

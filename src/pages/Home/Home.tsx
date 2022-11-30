@@ -17,7 +17,6 @@ export const Home: FC = (): JSX.Element => {
     if (errorAlbums || errorUsers) return <Error text={'Couldnt get items'} />
     if (isLoadingUsers || isLoadingAlbums || !albums || !users) return <Loader />;
 
-
     return (
         <>
             <Header />
