@@ -25,7 +25,8 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
     const dragItem = useRef(null) as MutableRefObject<number | null>;
     const dragOverItem = useRef(null) as MutableRefObject<number | null>;
     const previusOverItem = useRef(null) as MutableRefObject<number | null>;
-
+    const open = !!photos.length ? 'open' : '';
+    const buttonState = !photos.length ? 'Open' : 'Close';
     const getPhotos = async (): Promise<void> => {
         try {
             const { data: fetchdPhotos, error } = await refetch();
@@ -67,14 +68,10 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
     }
 
     return (
-        <div className='album-container'>
-            <div className='user-name'>{album.title}</div>
-            <div className='user-email'>{user?.id}</div>
-            <div className='user-name'>{user?.name}</div>
-            <div className='user-email'>{user?.email}</div>
-            <div className='collapse-image' onClick={() => toggleInfo()}>^</div>
+        <div className={`album-container ${open}`}>
+            <h3 className='album-title'>{album.title}</h3>
             {!!error && <Error text={error} />}
-            {!!photos &&
+            {!!photos.length &&
                 <div className='album-info-container'>
                     <DndProvider backend={HTML5Backend}>
                         {photos.map((photo, index) => <ThumbnailImage
@@ -92,7 +89,12 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
                     {selectedPhoto !== '' && <SelectedPhoto setSelectedPhoto={setSelectedPhoto} selectedPhoto={selectedPhoto} />}
                 </div>
             }
-
+            <div className="data">
+                <p className='user-id'><span>ID: </span>{user?.id}</p>
+                <p className='user-name'><span>Name: </span>{user?.name}</p>
+                <p className='user-email'><span>Email: </span>{user?.email}</p>
+            </div>
+            <button className='cta' onClick={() => toggleInfo()}>{buttonState}</button>
         </div>
     )
 }

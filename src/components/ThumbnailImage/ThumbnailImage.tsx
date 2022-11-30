@@ -60,7 +60,9 @@ export const ThumbnailImage: FC<Props> = ({
                 {photo.title}
             </div>}
             {/* TODO make in the image */}
-            <button className='exit-button' onClick={(e) => onDeletePhoto(e)}>x</button>
+            <button className='close-button' onClick={(e) => onDeletePhoto(e)}>
+                <span className='close-icon'></span>
+            </button>
             <img src={photo.thumbnailUrl} alt={'thumbnail'} />
         </div>
     )

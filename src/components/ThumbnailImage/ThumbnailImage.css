@@ -1,17 +1,20 @@
-.photo-container{
+.photo-container {
     position: relative;
 }
 
-
-.exit-button{
-    position: absolute;
-    right: 0;
+img {
+    border-radius: 4px;
 }
 
 .thumbnail{
-    /* TODO change design */
     position: absolute;
-    top:15px;
-    background-color: white;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
     z-index: 1;
+    width: 150px;
+    border-radius: 4px;
+    padding: 6px 10px;
+    box-shadow: 0 12px 24px 0 rgb(0 0 0 / 12%);
 }

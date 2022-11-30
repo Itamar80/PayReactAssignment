@@ -20,9 +20,9 @@ export const Home: FC = (): JSX.Element => {
     return (
         <>
             <Header />
-            <div className='data-container'>
+            <main className='data-container'>
                 {albums.map((album: Album) => <AlbumComponent key={album.id} user={users[album.userId]} album={album} />)}
-        </div>
+            </main>
         </>
     )
 }

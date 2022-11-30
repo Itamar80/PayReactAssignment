@@ -1,16 +1,21 @@
-.selected-photo-container{
+.selected-photo-container {
     position: fixed;
-    background-color: red;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
 }
 
-.selected-photo-container span{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    color: white;
-    cursor: pointer;
+.screen {
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(0 0 0 / 20%);
+    z-index: -1;
+    transition: .4s;
 }

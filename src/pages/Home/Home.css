@@ -2,5 +2,11 @@
     margin: 0 auto;
     max-width: 1200px;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
 }
 

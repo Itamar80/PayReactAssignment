@@ -1,4 +1,19 @@
-.header-container{
-    height: 4rem;
-    background-color: red;
+.header-container {
+    height: 60px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    z-index: 10;
+    background-color: hsla(0,0%,100%,.6);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    display: flex;
+}
+
+h1 {
+    margin: auto 20px;
+    font-weight: 500;
+    font-size: 25px;
 }

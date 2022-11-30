@@ -7,8 +7,8 @@ type Props = {
 
 export const Header: FC<Props> = (): JSX.Element => {
     return (
-        <div className='header-container'>
-            header
-        </div>
+        <header className='header-container'>
+            <h1>Pay.</h1>
+        </header>
     )
 }
