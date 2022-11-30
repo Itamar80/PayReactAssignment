@@ -1,28 +1,33 @@
 import { FC, MutableRefObject, useRef, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { getAlbumPhotos } from '../../services/service';
 import { Album, Photo, User } from '../../types/types';
 import { ThumbnailImage } from '../ThumbnailImage/ThumbnailImage';
 import { SelectedPhoto } from '../SelectedPhoto/SelectedPhoto';
+import { useQuery } from 'react-query'
+import { getAlbumPhotos } from '../../services/service';
 import './Album.css'
+import { PHOTOS, PHOTOS_ERROR } from '../../consts';
+import { Error } from '../Error/Error';
 
 type Props = {
     album: Album;
     user: User;
-    setError: (boolean: boolean) => void;
 }
 
 
-export const AlbumComponent: FC<Props> = ({ album, user, setError }): JSX.Element => {
+export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
+    const { refetch } = useQuery([PHOTOS, album.id], () => getAlbumPhotos(album.id));
     const [photos, setPhotos] = useState<Photo[]>([]);
     const [selectedPhoto, setSelectedPhoto] = useState<string>('');
+    const [error, setError] = useState<string | null>('');
     const dragItem = useRef(null) as MutableRefObject<number | null>;
     const dragOverItem = useRef(null) as MutableRefObject<number | null>;
 
-    const getPhotos = async (albumId: number): Promise<void> => {
-        const fetchdPhotos = await getAlbumPhotos(albumId);
-        if (!fetchdPhotos) setError(true);
+    const getPhotos = async (): Promise<void> => {
+        const { data: fetchdPhotos, error } = await refetch();
+        if (!fetchdPhotos?.length || error) return setError(PHOTOS_ERROR);
+        setError(null);
         setPhotos(fetchdPhotos.slice(0, 12))
     }
 
@@ -33,7 +38,7 @@ export const AlbumComponent: FC<Props> = ({ album, user, setError }): JSX.Elemen
 
     const toggleInfo = () => {
         if (photos?.length) return setPhotos([]);
-        return getPhotos(album.id)
+        return getPhotos()
     }
 
     const handleSort = () => {
@@ -55,6 +60,7 @@ export const AlbumComponent: FC<Props> = ({ album, user, setError }): JSX.Elemen
             <div className='collapse-image' onClick={() => toggleInfo()}>^</div>
             {!!photos &&
                 <div className='album-info-container'>
+                    {!!error && <Error text={error} />}
                     <DndProvider backend={HTML5Backend}>
                         {photos.map((photo, index) => <ThumbnailImage
                             key={photo.id}
