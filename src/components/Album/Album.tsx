@@ -1,14 +1,14 @@
 import { FC, MutableRefObject, useRef, useState } from 'react';
-import { Album, Photo, User } from '../../types/types';
-import { ThumbnailImage } from '../ThumbnailImage/ThumbnailImage';
-import { SelectedPhoto } from '../SelectedPhoto/SelectedPhoto';
-import { useQuery } from 'react-query'
-import { getAlbumPhotos } from '../../services/service';
-import './Album.css'
-import { DRAG_ERROR, MAX_PHOTOS, PHOTOS, PHOTOS_ERROR } from '../../consts';
-import { Error } from '../Error/Error';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { useQuery } from 'react-query'
+import { getAlbumPhotos } from '../../services/service';
+import { ThumbnailImage } from '../ThumbnailImage/ThumbnailImage';
+import { SelectedPhoto } from '../SelectedPhoto/SelectedPhoto';
+import { Error } from '../Error/Error';
+import { Album, Photo, User } from '../../types/types';
+import { DRAG_ERROR, MAX_PHOTOS, PHOTOS, PHOTOS_ERROR, ADJACENT_POSITION } from '../../consts';
+import './Album.css'
 
 type Props = {
     album: Album;
@@ -51,10 +51,9 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
         setError('')
         let sortedPhotos = [...photos];
         if (!dragItem.current || !dragOverItem.current || !previusOverItem.current) return;
-        if ((dragOverItem.current - previusOverItem.current) === 1 ||
-            (previusOverItem.current - dragOverItem.current) === 1
-        ) {
-            const draggedItemContent = sortedPhotos.splice(dragItem.current, 1)[0];
+        if ((dragOverItem.current - previusOverItem.current) === ADJACENT_POSITION ||
+            (previusOverItem.current - dragOverItem.current) === ADJACENT_POSITION) {
+            const [draggedItemContent] = sortedPhotos.splice(dragItem.current, ADJACENT_POSITION);
             const isPrevuisAboveCurrent = previusOverItem.current > dragOverItem.current;
             const indexToReplace = isPrevuisAboveCurrent ? previusOverItem.current : dragOverItem.current;
             sortedPhotos.splice(indexToReplace, 0, draggedItemContent);

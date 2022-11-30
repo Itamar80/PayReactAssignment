@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query'
+import { getAlbums, getUsers } from '../../services/service';
 import { AlbumComponent } from '../../components/Album/Album';
 import { Header } from '../../components/Header/Header';
-import { ALBUMS, USERS } from '../../consts';
-import { getAlbums, getUsers } from '../../services/service';
-import { Album } from '../../types/types';
 import { Error } from '../../components/Error/Error';
-import './Home.css'
 import { Loader } from '../../components/Loader/Loader';
+import { ALBUMS, USERS } from '../../consts';
+import { Album } from '../../types/types';
+import './Home.css'
 
 
 export const Home: FC = (): JSX.Element => {

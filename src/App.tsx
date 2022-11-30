@@ -1,8 +1,6 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom"; import { Home } from './pages/Home/Home';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from 'react-query';
+import { Home } from './pages/Home/Home';
 
 const router = createBrowserRouter([
   {

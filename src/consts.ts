@@ -5,3 +5,4 @@ export const PHOTOS = 'photos';
 export const PHOTOS_ERROR = 'Couldnt get photos';
 export const DRAG_ERROR = 'Drag between two adjacent please';
 export const MAX_PHOTOS = 12;
+export const ADJACENT_POSITION = 1;

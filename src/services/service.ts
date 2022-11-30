@@ -13,6 +13,6 @@ export const getUsers = async (): Promise<User[]> => {
 }
 
 export const getAlbumPhotos = async (albumId: number): Promise<Photo[]> => {
-    const res = await fetch(`${URL}/albums/${albumId}/${PHOTOS}`);
+    const res = await fetch(`${URL}/${ALBUMS}/${albumId}/${PHOTOS}`);
     return res.json();
 }

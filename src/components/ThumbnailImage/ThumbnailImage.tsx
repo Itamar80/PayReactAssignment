@@ -1,14 +1,14 @@
 import { FC, useState } from 'react';
+import { useDrag } from 'react-dnd';
 import { Photo } from '../../types/types';
 import './ThumbnailImage.css'
-import { useDrag } from 'react-dnd';
 
 type Props = {
-    photo: Photo;
     deletePhoto: (photoId: number) => void;
     setSelectedPhoto: (str: string) => void;
-    index: number;
     handleSort: () => void;
+    index: number;
+    photo: Photo;
     dragItem: React.MutableRefObject<null | number>;
     dragOverItem: React.MutableRefObject<null | number>;
     previusOverItem: React.MutableRefObject<null | number>;
@@ -16,11 +16,11 @@ type Props = {
 
 
 export const ThumbnailImage: FC<Props> = ({
-    photo,
-    index,
     deletePhoto,
     setSelectedPhoto,
     handleSort,
+    index,
+    photo,
     dragItem,
     dragOverItem,
     previusOverItem
