@@ -1,9 +1,9 @@
 # Getting Started with Create React App
 
-Clone the project with
+1. Clone the project
 
-Downlading the dependencies:
+2. Downlading the dependencies:
 Command -> yarn 
 
-Starting the project:
+3. Starting the project:
 Command -> yarn start 
