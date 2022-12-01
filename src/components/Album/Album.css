@@ -35,7 +35,7 @@ font-weight: 600;
 
 .album-info-container{
     display: grid;
-    justify-content: space-evenly;
+    justify-content: center;
     position: relative;
     grid-template-columns: repeat(4, 110px);
     gap: .5rem;

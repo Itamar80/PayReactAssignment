@@ -54,19 +54,10 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
     const handleSort = (): void => {
         setError('')
         let sortedPhotos = [...photos];
-        if (dragItem.current === null || dragOverItem.current === null) return;
+        if (dragItem.current === null || dragOverItem.current === null || previusOverItem.current === null) return;
         const [draggedItemContent] = sortedPhotos.splice(dragItem.current, ADJACENT_POSITION);
-        if (dragOverItem.current === previusOverItem.current || !previusOverItem.current) {
-            console.log('replace between items');
-            sortedPhotos.splice(dragOverItem.current, 0, draggedItemContent);
-            //TODO add logic to replace items
-            dragItem.current = null;
-            dragOverItem.current = null;
-            return setPhotos(sortedPhotos)
-        }
         if ((dragOverItem.current - previusOverItem.current) === ADJACENT_POSITION ||
             (previusOverItem.current - dragOverItem.current) === ADJACENT_POSITION) {
-            console.log('they are ADJACENT');
             const isPrevuisAboveCurrent = previusOverItem.current > dragOverItem.current;
             const indexToReplace = isPrevuisAboveCurrent ? previusOverItem.current : dragOverItem.current;
             sortedPhotos.splice(indexToReplace, 0, draggedItemContent);
@@ -74,7 +65,6 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
             dragOverItem.current = null;
             return setPhotos(sortedPhotos)
         }
-        console.log('they are not');
         return setError(DRAG_ERROR)
     }
 

@@ -40,7 +40,7 @@ export const ThumbnailImage: FC<Props> = ({
     }
 
     const setDragOverRefs = () => {
-        if (dragItem.current === index) return;
+        if (dragItem.current === index || dragOverItem.current === index) return;
         previusOverItem.current = dragOverItem.current
         dragOverItem.current = index
         if ((index === previusOverItem.current || index === dragOverItem.current) && index !== dragItem.current) {
