@@ -23,7 +23,7 @@ export const ThumbnailImage: FC<Props> = ({
     photo,
     dragItem,
     dragOverItem,
-    previusOverItem
+    previusOverItem,
 }): JSX.Element => {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: 'div',
@@ -31,37 +31,52 @@ export const ThumbnailImage: FC<Props> = ({
             isDragging: !!monitor.isDragging()
         })
     }));
+    const [draggingIntoBorder, setDraggingIntoBorder] = useState<string>('');
     const [isHover, setIsHover] = useState<boolean>(false);
-
+    const draggingBorder = isDragging ? 'dragging-border' : '';
     const onDeletePhoto = (e: React.MouseEvent<HTMLElement>) => {
         deletePhoto(photo.id);
         e.stopPropagation()
     }
 
     const setDragOverRefs = () => {
+        if (dragItem.current === index) return;
         previusOverItem.current = dragOverItem.current
         dragOverItem.current = index
+        if ((index === previusOverItem.current || index === dragOverItem.current) && index !== dragItem.current) {
+            setDraggingIntoBorder('dragging-into-border')
+            setTimeout(() => {
+                setDraggingIntoBorder('')
+            }, 1000)
+        }
+    }
+
+    const onDragStart = () => {
+        setDraggingIntoBorder('')
+        setIsHover(false)
+        dragItem.current = index
+    }
+
+    const onDragEnd = () => {
+        handleSort()
     }
 
     return (
-        <div className={`photo-container`}
+        <div className={`photo-container ${draggingBorder} ${draggingIntoBorder}`}
             ref={drag}
-            // TODO change style while dragging
-            style={{ border: isDragging ? '5px solid pink' : '0px' }}
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
-            onDragStart={() => dragItem.current = index}
+            onDragStart={() => onDragStart()}
             onDragEnter={() => setDragOverRefs()}
-            onDragEnd={handleSort}
-            onClick={() => setSelectedPhoto(photo.url)}
+            onDragEnd={() => onDragEnd()}
             onDragOver={(e) => e.preventDefault()}
+            onClick={() => setSelectedPhoto(photo.url)}
         >
             {isHover && <div className='thumbnail'>
                 {photo.title}
             </div>}
-            {/* TODO make in the image */}
             <button className='close-button' onClick={(e) => onDeletePhoto(e)}>
-                <span className='close-icon'></span>
+                <span className='close-icon' />
             </button>
             <img src={photo.thumbnailUrl} alt={'thumbnail'} />
         </div>

@@ -18,3 +18,11 @@ img {
     padding: 6px 10px;
     box-shadow: 0 12px 24px 0 rgb(0 0 0 / 12%);
 }
+
+.dragging-border{
+    border: 2px solid white;
+}
+
+.dragging-into-border{
+    border: 2px solid red;
+}
