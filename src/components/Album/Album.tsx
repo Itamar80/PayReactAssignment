@@ -8,6 +8,7 @@ import { SelectedPhoto } from '../SelectedPhoto/SelectedPhoto';
 import { Error } from '../Error/Error';
 import { Album, Photo, User } from '../../types/types';
 import { DRAG_ERROR, MAX_PHOTOS, PHOTOS, PHOTOS_ERROR, ADJACENT_POSITION } from '../../consts';
+import { Collapse } from 'react-collapse';
 import './Album.css'
 
 type Props = {
@@ -76,7 +77,7 @@ export const AlbumComponent: FC<Props> = ({ album, user, activeAlbumId, setActiv
         <div className={`album-container ${open}`}>
             <h3 className='album-title'>{album.title}</h3>
             {!!error && <Error text={error} />}
-            {!!photos.length &&
+            <Collapse isOpened={!!photos.length}>
                 <div className='album-info-container'>
                     <DndProvider backend={HTML5Backend}>
                         {photos.map((photo, index) => <ThumbnailImage
@@ -93,7 +94,7 @@ export const AlbumComponent: FC<Props> = ({ album, user, activeAlbumId, setActiv
                     </DndProvider>
                     {selectedPhoto !== '' && <SelectedPhoto setSelectedPhoto={setSelectedPhoto} selectedPhoto={selectedPhoto} />}
                 </div>
-            }
+            </Collapse>
             <div className="data">
                 <p className='album-id'><span>Album ID: </span>{album?.id}</p>
                 <p className='user-name'><span>Name: </span>{user?.name}</p>
