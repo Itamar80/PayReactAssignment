@@ -6,17 +6,14 @@
     align-items: center;
     background-color: #fff;
     padding: 1rem;
-    width: clamp(250px, 250px, 100%);
+    width: 100%;
     min-height: 250px;
     border-radius: 16px;
     box-shadow: 0 16px 40px 0 rgb(0 0 0 / 18%);
 }
 
 .album-container.open {
-    position: fixed;
-    width: unset;
-    inset: 30px;
-    z-index: 20;
+    z-index: 10;
     background: linear-gradient(180deg,#adabff,#57e5b2);
 }
 

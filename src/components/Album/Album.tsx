@@ -13,9 +13,11 @@ import './Album.css'
 type Props = {
     album: Album;
     user: User;
+    activeAlbumId: number | null;
+    setActiveAlbumId: (id: number | null) => void;
 }
 
-export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
+export const AlbumComponent: FC<Props> = ({ album, user, activeAlbumId, setActiveAlbumId }): JSX.Element => {
     const { refetch } = useQuery([PHOTOS, album.id], () => getAlbumPhotos(album.id), {
         enabled: false
     });
@@ -46,8 +48,10 @@ export const AlbumComponent: FC<Props> = ({ album, user }): JSX.Element => {
     const toggleInfo = () => {
         if (photos?.length) {
             setError('')
+            setActiveAlbumId(null);
             return setPhotos([])
         };
+        setActiveAlbumId(album.id);
         return getPhotos()
     }
 
