@@ -11,7 +11,7 @@ type Props = {
     photo: Photo;
     dragItem: React.MutableRefObject<null | number>;
     dragOverItem: React.MutableRefObject<null | number>;
-    previusOverItem: React.MutableRefObject<null | number>;
+    previousOverItem: React.MutableRefObject<null | number>;
 }
 
 
@@ -23,7 +23,7 @@ export const ThumbnailImage: FC<Props> = ({
     photo,
     dragItem,
     dragOverItem,
-    previusOverItem,
+    previousOverItem,
 }): JSX.Element => {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: 'div',
@@ -41,9 +41,9 @@ export const ThumbnailImage: FC<Props> = ({
 
     const setDragOverRefs = () => {
         if (dragItem.current === index || dragOverItem.current === index) return;
-        previusOverItem.current = dragOverItem.current
+        previousOverItem.current = dragOverItem.current
         dragOverItem.current = index
-        if ((index === previusOverItem.current || index === dragOverItem.current) && index !== dragItem.current) {
+        if ((index === previousOverItem.current || index === dragOverItem.current) && index !== dragItem.current) {
             setDraggingIntoBorder('dragging-into-border')
             setTimeout(() => {
                 setDraggingIntoBorder('')

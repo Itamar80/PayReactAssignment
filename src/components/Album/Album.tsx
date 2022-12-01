@@ -26,7 +26,7 @@ export const AlbumComponent: FC<Props> = ({ album, user, activeAlbumId, setActiv
     const [error, setError] = useState<string | null>('');
     const dragItem = useRef(null) as MutableRefObject<number | null>;
     const dragOverItem = useRef(null) as MutableRefObject<number | null>;
-    const previusOverItem = useRef(null) as MutableRefObject<number | null>;
+    const previousOverItem = useRef(null) as MutableRefObject<number | null>;
     const open = !!photos.length ? 'open' : '';
     const buttonState = !photos.length ? 'Open' : 'Close';
     const getPhotos = async (): Promise<void> => {
@@ -58,12 +58,12 @@ export const AlbumComponent: FC<Props> = ({ album, user, activeAlbumId, setActiv
     const handleSort = (): void => {
         setError('')
         let sortedPhotos = [...photos];
-        if (dragItem.current === null || dragOverItem.current === null || previusOverItem.current === null) return;
+        if (dragItem.current === null || dragOverItem.current === null || previousOverItem.current === null) return;
         const [draggedItemContent] = sortedPhotos.splice(dragItem.current, ADJACENT_POSITION);
-        if ((dragOverItem.current - previusOverItem.current) === ADJACENT_POSITION ||
-            (previusOverItem.current - dragOverItem.current) === ADJACENT_POSITION) {
-            const isPrevuisAboveCurrent = previusOverItem.current > dragOverItem.current;
-            const indexToReplace = isPrevuisAboveCurrent ? previusOverItem.current : dragOverItem.current;
+        if ((dragOverItem.current - previousOverItem.current) === ADJACENT_POSITION ||
+            (previousOverItem.current - dragOverItem.current) === ADJACENT_POSITION) {
+            const isPrevuisAboveCurrent = previousOverItem.current > dragOverItem.current;
+            const indexToReplace = isPrevuisAboveCurrent ? previousOverItem.current : dragOverItem.current;
             sortedPhotos.splice(indexToReplace, 0, draggedItemContent);
             dragItem.current = null;
             dragOverItem.current = null;
@@ -87,7 +87,7 @@ export const AlbumComponent: FC<Props> = ({ album, user, activeAlbumId, setActiv
                             photo={photo}
                             index={index}
                             dragItem={dragItem}
-                            previusOverItem={previusOverItem}
+                            previousOverItem={previousOverItem}
                             dragOverItem={dragOverItem}
                         />)}
                     </DndProvider>
