@@ -34,12 +34,13 @@ export const ThumbnailImage: FC<Props> = ({
     const [draggingIntoBorder, setDraggingIntoBorder] = useState<string>('');
     const [isHover, setIsHover] = useState<boolean>(false);
     const draggingBorder = isDragging ? 'dragging-border' : '';
+
     const onDeletePhoto = (e: React.MouseEvent<HTMLElement>) => {
         deletePhoto(photo.id);
         e.stopPropagation()
     }
 
-    const setDragOverRefs = () => {
+    const setDragOverRefs = (): void => {
         if (dragItem.current === index || dragOverItem.current === index) return;
         previousOverItem.current = dragOverItem.current
         dragOverItem.current = index
@@ -51,14 +52,10 @@ export const ThumbnailImage: FC<Props> = ({
         }
     }
 
-    const onDragStart = () => {
+    const onDragStart = (): void => {
         setDraggingIntoBorder('')
         setIsHover(false)
         dragItem.current = index
-    }
-
-    const onDragEnd = () => {
-        handleSort()
     }
 
     return (
@@ -68,7 +65,7 @@ export const ThumbnailImage: FC<Props> = ({
             onMouseLeave={() => setIsHover(false)}
             onDragStart={() => onDragStart()}
             onDragEnter={() => setDragOverRefs()}
-            onDragEnd={() => onDragEnd()}
+            onDragEnd={() => handleSort()}
             onDragOver={(e) => e.preventDefault()}
             onClick={() => setSelectedPhoto(photo.url)}
         >

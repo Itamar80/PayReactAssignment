@@ -30,6 +30,7 @@ export const AlbumComponent: FC<Props> = ({ album, user, activeAlbumId, setActiv
     const previousOverItem = useRef(null) as MutableRefObject<number | null>;
     const open = !!photos.length ? 'open' : '';
     const buttonState = !photos.length ? 'Open' : 'Close';
+
     const getPhotos = async (): Promise<void> => {
         try {
             const { data: fetchdPhotos, error } = await refetch();
@@ -63,8 +64,8 @@ export const AlbumComponent: FC<Props> = ({ album, user, activeAlbumId, setActiv
         const [draggedItemContent] = sortedPhotos.splice(dragItem.current, ADJACENT_POSITION);
         if ((dragOverItem.current - previousOverItem.current) === ADJACENT_POSITION ||
             (previousOverItem.current - dragOverItem.current) === ADJACENT_POSITION) {
-            const isPrevuisAboveCurrent = previousOverItem.current > dragOverItem.current;
-            const indexToReplace = isPrevuisAboveCurrent ? previousOverItem.current : dragOverItem.current;
+            const isPreviousAboveCurrent = previousOverItem.current > dragOverItem.current;
+            const indexToReplace = isPreviousAboveCurrent ? previousOverItem.current : dragOverItem.current;
             sortedPhotos.splice(indexToReplace, 0, draggedItemContent);
             dragItem.current = null;
             dragOverItem.current = null;

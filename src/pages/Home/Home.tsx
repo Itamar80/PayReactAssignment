@@ -21,7 +21,14 @@ export const Home: FC = (): JSX.Element => {
         <>
             <Header />
             <main className='data-container'>
-                {albums.map((album: Album) => <AlbumComponent setActiveAlbumId={setActiveAlbumId} activeAlbumId={activeAlbumId} key={album.id} user={users[album.userId]} album={album} />)}
+                {albums.map((album: Album) =>
+                    <AlbumComponent
+                        setActiveAlbumId={setActiveAlbumId}
+                        activeAlbumId={activeAlbumId}
+                        key={album.id}
+                        user={users[album.userId]}
+                        album={album}
+                    />)}
             </main>
         </>
     )
