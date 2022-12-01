@@ -19,6 +19,7 @@
 
 .data {
 text-align: left;
+margin-top: 1rem;
 }
 
 .data > p > span {
