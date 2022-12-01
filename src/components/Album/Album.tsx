@@ -95,7 +95,7 @@ export const AlbumComponent: FC<Props> = ({ album, user, activeAlbumId, setActiv
                 </div>
             }
             <div className="data">
-                <p className='user-id'><span>ID: </span>{user?.id}</p>
+                <p className='album-id'><span>Album ID: </span>{album?.id}</p>
                 <p className='user-name'><span>Name: </span>{user?.name}</p>
                 <p className='user-email'><span>Email: </span>{user?.email}</p>
             </div>
